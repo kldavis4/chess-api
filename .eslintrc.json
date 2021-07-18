@@ -1,0 +1,9 @@
+{
+  "root": true,
+  "extends": ["standard"],
+  "env": {
+    "jest": true,
+    "node": true
+  },
+  "parser": "babel-eslint"
+}

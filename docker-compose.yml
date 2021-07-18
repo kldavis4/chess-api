@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      args:
+        NPM_OPTS:
+    command: npm run nodemon
+    depends_on:
+      - mongo
+    environment:
+      MONGO_HOST: mongo
+      MONGO_PORT: 27017
+    ports:
+      - 3000:3000
+    volumes:
+      - ./model:/usr/src/app/model
+      - ./logic:/usr/src/app/logic
+      - ./routes:/usr/src/app/routes
+      - ./app.js:/usr/src/app/app.js
+      - ./constants.js:/usr/src/app/constants.js
+      - ./db.js:/usr/src/app/db.js
+
+  mongo:
+    image: mongo:3.4
+    ports:
+      - 27017:27017
+    volumes:
+      - ./.data:/data/db
