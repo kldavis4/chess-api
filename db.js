@@ -1,12 +1,14 @@
 const mongoose = require('mongoose')
 const ChessGame = require('./model/chessgame')
 
-let connected = false
+const MONGO_HOST = process.env.MONGO_HOST || 'localhost'
+const MONGO_PORT = process.env.MONGO_PORT || 27017
 
-mongoose.connect(
-  `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/chess`,
-  { useNewUrlParser: true, useUnifiedTopology: true }
-)
+let connected = false
+mongoose.connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/chess`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', function () {
