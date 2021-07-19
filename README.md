@@ -2,6 +2,23 @@
 
 A RESTful Chess api.
 
+## Pre-requisites
+
+- Node 14.x
+- Docker
+
+## Setup
+
+```
+npm install
+```
+
+## Running the application locally
+
+```
+docker-compose up
+```
+
 ## API
 
 ### Create a new game
@@ -32,7 +49,7 @@ Example:
 curl 'http://localhost:3000/games/60f4b0c912e1d6001e82c68d'
 ```
 
-### Get available moves for a piece in a game instance
+### Get available moves for a piece in a game
 
 `GET http://localhost:3000/games/<id>/moves/<position>`
 
@@ -77,17 +94,6 @@ curl --location --request POST 'http://localhost:3000/games/60f4b0c912e1d6001e82
     "player": "white",
     "position": "a4"
 }'
-```
-
-## Pre-requisites
-
-- Node 14.x
-- Docker
-
-## Setup
-
-```
-npm install
 ```
 
 ### Environment Variables
