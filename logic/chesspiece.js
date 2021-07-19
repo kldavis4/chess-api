@@ -14,7 +14,7 @@ const MOVEMENT_FUNCTIONS = {
 const availableMoves = (board, src, piece) => {
   const availableMovesFn = MOVEMENT_FUNCTIONS[piece.type]
   if (!availableMovesFn) {
-    throw `${piece.type} Not Implemented`
+    throw 'Not Implemented'
   }
   return availableMovesFn(board, src, piece)
 }

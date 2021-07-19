@@ -89,7 +89,7 @@ schema.methods.move = function (player, src, dst, override = false) {
     if (piece.player === player) {
       const requestedMove = availableMoves(this.board, srcPos, piece)[dst]
       validMove = !!requestedMove
-      isCapture = validMove && requestedMove.capture
+      isCapture = validMove && requestedMove.capture  
     }
   }
 

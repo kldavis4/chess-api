@@ -115,7 +115,7 @@ describe('game', () => {
     it('rook move throws exception', () => {
       expect(() => {
         game.availableMoves('a1')
-      }).toThrow(`${ROOK} Not Implemented`)
+      }).toThrow(`Not Implemented`)
     })
   })
 

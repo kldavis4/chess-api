@@ -75,9 +75,14 @@ router.get('/games/:gameId/moves/:position', async (req, res, next) => {
   }
 
   if (game) {
-    res
+    try {
+      const moves = game.availableMoves(position)
+      res
       .status(200)
-      .json({ _id: game._id, position, moves: game.availableMoves(position) })
+      .json({ _id: game._id, position, moves })  
+    } catch (err) {
+      res.status(500).json({ message: err })
+    }
   } else {
     res.status(404).json({ message: MESSAGE_404 })
   }
@@ -120,7 +125,14 @@ router.post('/games/:gameId/moves/:position', async (req, res, next) => {
   }
 
   if (game) {
-    const error = game.move(player, srcPos, dstPos)
+    let error
+    try {
+      error = game.move(player, srcPos, dstPos)
+    } catch (err) {
+      res.status(500).json({ message: err })
+      return
+    }
+
     if (!error) {
       try {
         game = await saveGame(id, game)
