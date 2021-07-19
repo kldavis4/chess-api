@@ -8,14 +8,13 @@ const { createGame, isValidGameId, loadGame, saveGame } = require('../db')
 
 const MESSAGE_412 = 'Invalid move'
 const MESSAGE_404 = 'Chess game not found'
-const MESSAGE_500 = 'Unexpected error'
 
 router.post('/games', async (req, res, next) => {
   try {
     res.status(200).json(await createGame())
   } catch (err) {
     console.error(err)
-    res.status(500).json({ message: 'Unexpected error' })
+    res.status(500).json({ message: err })
   }
 })
 
@@ -36,7 +35,7 @@ router.get('/games/:gameId', async (req, res, next) => {
     }
   } catch (err) {
     console.error(err)
-    res.status(500).json({ message: MESSAGE_500 })
+    res.status(500).json({ message: err })
   }
 })
 
@@ -70,7 +69,7 @@ router.get('/games/:gameId/moves/:position', async (req, res, next) => {
     game = await loadGame(id)
   } catch (err) {
     console.error(err)
-    res.status(500).json({ message: MESSAGE_500 })
+    res.status(500).json({ message: err })
     return
   }
 
@@ -120,7 +119,7 @@ router.post('/games/:gameId/moves/:position', async (req, res, next) => {
     game = await loadGame(id)
   } catch (err) {
     console.error(err)
-    res.status(500).json({ message: MESSAGE_500 })
+    res.status(500).json({ message: err })
     return
   }
 
@@ -138,7 +137,7 @@ router.post('/games/:gameId/moves/:position', async (req, res, next) => {
         game = await saveGame(id, game)
         res.status(200).json(game)
       } catch (err) {
-        res.status(500).json({ message: MESSAGE_500 })
+        res.status(500).json({ message: err })
       }
     } else {
       res.status(412).json({ message: error })
