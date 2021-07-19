@@ -7,17 +7,13 @@ A RESTful Chess api.
 - Node 14.x
 - Docker
 
-## Setup
-
-```
-npm install
-```
-
 ## Running the application locally
 
 ```
 docker-compose up
 ```
+
+NOTE: Before making api requests please ensure that the database has initialized and the application has connected.
 
 ## API
 
@@ -96,13 +92,21 @@ curl --location --request POST 'http://localhost:3000/games/60f4b0c912e1d6001e82
 }'
 ```
 
-### Environment Variables
+## Development
+
+### Setup
+
+```
+npm install
+```
+
+#### Environment Variables
 
 - `PORT` - The port that the application listens on. Defaults to 3000
 - `MONGO_HOST` - Hostname of the mongodb server
 - `MONGO_PORT` - Port that the mongodb server listens on.
 
-## Scripts
+### Scripts
 
 Scripts should be run using `npm run <script>`
 
@@ -112,17 +116,17 @@ Scripts should be run using `npm run <script>`
 - `test` - run unit tests
 - `test-watch` - run unit tests with automatic reruns when files are changed
 
-## Docker
+### Docker
 
 A `Dockerfile` is included to build a docker image for the api.
 
-### Running with `docker-compose`
+#### Running with `docker-compose`
 
 `docker-compose up` will start an instance of the application and a mongodb container. The api can be accessed at http://localhost:3000. The application is configured in development mode and will restart automatically when source files are modified.
 
 The mongodb data is stored in the `.data` folder to allow it to persist across database restarts.
 
-## Organization
+### Organization
 
 - `app.js` - Express application
 - `constants.js` - Game related constants
@@ -133,22 +137,22 @@ The mongodb data is stored in the `.data` folder to allow it to persist across d
 - `tests/logic` - unit tests for logic modules
 - `tests/model` - unit tests for model modules
 
-## Schema
+### Schema
 
-### Game state
+#### Game state
 
 - `_id` - game id
 - `turn` - the current turn's player. `black` or `white`.
 - `board` - object with the current board state.
 - `captured` - object like `{ "black": [], "white": [] }` where `black` is an array of the pieces captured by the black player and `white` is an array of the pieces captured by the white player.
 
-### Game Piece
+#### Game Piece
 
 - `type` - the type of the chess piece. Possible values: `Pawn`, `Rook`, `Knight`, `Bishop`, `Queen`, `King`.
 - `player` - the player who owns the piece. Possible values: `white` or `black`.
 - `moves` - the number of times the piece has been moved.
 
-### Board
+#### Board
 
 The board object is a 2 dimensional array with "file" as the first dimension and "rank" as the second dimension. The file indices are: 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'. The rank indices are: '1', '2', '3', '4', '5', '6', '7', '8'. The values are either `null` for an empty space, or a game piece.
 
